@@ -1,10 +1,10 @@
 FROM ubuntu
 LABEL maintainer="xx"
-RUN apt update && apt dist-upgrade && apt autoremove
+RUN apt update -y && apt dist-upgrade -y && apt autoremove -y 
 RUN wget -q -O - https://pkg.jenkins.io/debian/jenkins-ci.org.key | apt-key add -
 RUN sh -c "echo 'deb https://pkg.jenkins.io/debian-stable binary/' > /etc/apt/sources.list.d/Jenkins.list"
-RUN apt update
-RUN apt install jenkins
+RUN apt update -y
+RUN apt install jenkins -y
 RUN systemctl stop jenkins.service
 RUN systemctl start jenkins.service
 RUN systemctl enable jenkins.service
