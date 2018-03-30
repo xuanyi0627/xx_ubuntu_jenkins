@@ -4,11 +4,7 @@ USER root
 RUN apt-get update -y && apt-get install -y wget
 RUN wget -q -O - https://pkg.jenkins.io/debian/jenkins-ci.org.key | apt-key add -
 RUN sh -c 'echo deb http://pkg.jenkins.io/debian-stable binary/ > /etc/apt/sources.list.d/jenkins.list'
-RUN apt update -y
-RUN apt install jenkins -y
-RUN systemctl stop jenkins.service
-RUN systemctl start jenkins.service
-RUN systemctl enable jenkins.service
+RUN apt-get update -y && apt-get install -y jenkins
 ENTRYPOINT ["/var/lib/jenkins","-g","daemon off;"]
 EXPOSE 8080
 USER jenkins
